@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="login.html">Login</a>
+            <span>|</span>
+            <a href="cadastro.html" class="active">Cadastro</a>
+        </div>
+
+        <div class="form-container">
+            <h2>Cadastro de Usuário</h2>
+            <form id="register-form">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" required>
+
+                <label for="password">Senha</label>
+                <input type="password" id="password" required>
+
+                <button type="submit">Cadastrar</button>
+                <p class="redirect">Já tem uma conta? <a href="login.html">Faça login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+         
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+
+            alert('Usuário cadastrado com sucesso!');
+            window.location.href = 'login.html';
+        });
+    </script>
+
+    
+</body>
+</html>
