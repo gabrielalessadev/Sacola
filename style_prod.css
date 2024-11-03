@@ -8,24 +8,19 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
     background-color: #f0f2f5;
 }
 
 .container {
+    display: flex; 
     width: 100%;
-    max-width: 400px;
+    max-width: 1200px;
     background-color: #fff;
     padding: 2rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    text-align: center;
-}
-
-.container h3 {
-    margin: 1rem;
-    color: #333;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .nav-bar {
@@ -33,7 +28,6 @@ body {
     justify-content: center;
     align-items: center;
     margin-bottom: 1.5rem;
-    
 }
 
 .nav-bar a {
@@ -58,8 +52,9 @@ body {
     font-size: 1.2rem;
     margin: 0 0.5rem;
 }
+
 .form-container {
-    max-width: 400px;
+    max-width: 400px; 
     background-color: #fff;
     padding: 2rem;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -68,14 +63,21 @@ body {
     position: sticky;
     top: 20px; 
     z-index: 100; 
-    overflow-y: auto; 
-    height: calc(55vh - 40px); 
+    height: calc(56vh - 40px); 
+    overflow-y: auto;
 }
-.form-container h2, .form-container h3 {
+
+.form-container h2,
+.form-container h3 {
     margin-bottom: 1rem;
     color: #333;
 }
 
+.redirect {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
 form {
     display: flex;
     flex-direction: column;
@@ -112,38 +114,18 @@ button:hover {
     background-color: #45a049;
 }
 
-.redirect {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #777;
-}
-
-.redirect a {
-    color: #4CAF50;
-    text-decoration: none;
-}
-
-.redirect a:hover {
-    text-decoration: underline;
+.product-list-container {
+    flex: 1; 
+    padding: 20px; 
+    overflow-y: auto; 
+    height: calc(100vh - 40px); 
 }
 
 .product-list {
     margin-top: 1rem;
     text-align: left;
-}
-
-.product-list li {
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    color: #333;
-}
-
-.product-list {
     list-style: none;
     padding: 0;
-    margin-top: 20px;
 }
 
 .product-item {
@@ -244,7 +226,8 @@ button[type="submit"]:hover {
         align-items: flex-start; 
     }
 
-    .nav-bar a, .nav-bar span {
+    .nav-bar a,
+    .nav-bar span {
         font-size: 0.7rem; 
         padding: 0.2rem; 
     }
@@ -262,7 +245,9 @@ button[type="submit"]:hover {
         font-size: 0.7rem; 
     }
 
-    #upload-btn, button[type="submit"], .delete-btn {
-        width: 100%;
+    #upload-btn,
+    button[type="submit"],
+    .delete-btn {
+        width: 100%; 
     }
 }
