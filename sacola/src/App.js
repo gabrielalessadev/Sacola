@@ -1,7 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import Axios from "axios";
+import React, { useState } from 'react';
+
 
 function App() {
+  const [mensagem, setMensagem] = useState("");
+  Axios.get("http://localhost:3001/api/data", {
+  }).then((response) => {
+    console.log(response);
+    setMensagem(response.data.message); //mensagem recebe o conteúdo da requisição response.data na chave message
+  })
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,14 +19,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>
+          {mensagem}
+        </p>
       </header>
     </div>
   );
