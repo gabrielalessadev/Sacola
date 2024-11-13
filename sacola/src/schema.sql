@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS produto (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    codigo VARCHAR(50) UNIQUE NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    quantidade_disponivel INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(255),
+    telefone VARCHAR(20),
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    administrador TINYINT(1) DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS cliente (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(255),
+    email VARCHAR(255),
+    telefone VARCHAR(20),
+    cpf VARCHAR(11) UNIQUE NOT NULL
+);
