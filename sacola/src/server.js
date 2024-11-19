@@ -108,7 +108,7 @@ app.delete('/api/produto/:id', (req, res) => {
 app.post('/api/cliente', (req, res) => {
   const cliente = req.body
   const query = `INSERT INTO cliente (nome, endereco, email, telefone, cpf) 
-values ('${cliente.nome}', '${cliente.endereco}', ${cliente.email}, ${cliente.telefone}, ${cliente.cpf})`
+values ('${cliente.nome}', '${cliente.endereco}', '${cliente.email}', '${cliente.telefone}', '${cliente.cpf}')`
 
   connection.execute(query, [], (err, results) => {
     if (err) {
@@ -157,7 +157,7 @@ app.get('/api/cliente/:id', (req, res) => {
 app.patch('/api/cliente/:id', (req, res) => {
   const id = req.params.id
   const cliente = req.body
-  const query = `UPDATE cliente SET nome =  '${cliente.nome}', endereco = '${cliente.endereco}', email = ${cliente.email}, telefone = ${cliente.telefone}, cpf = '${cliente.cpf}' WHERE id = ${id}`
+  const query = `UPDATE cliente SET nome =  '${cliente.nome}', endereco = '${cliente.endereco}', email = '${cliente.email}', telefone = '${cliente.telefone}', cpf = '${cliente.cpf}' WHERE id = ${id}`
 
   connection.execute(query, [], (err, results) => {
     if (err) {
