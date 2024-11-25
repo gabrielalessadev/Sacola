@@ -1,7 +1,6 @@
 import '../style/Produto.css';
 import React, { useState, useEffect } from 'react';
 import Axios from "axios";
-import { useNavigate } from 'react-router-dom';
 
 function Cliente() {
     const [values, setValues] = useState({ username: '', email: '' });
@@ -15,11 +14,6 @@ function Cliente() {
             [value.target.name]: value.target.value,
         }))
     };
-
-    const navigate = useNavigate();
-    const goToLoginPage = () =>{
-        navigate('/');
-    }
 
     const handleClickButton = async (e) => {
         e.preventDefault();
