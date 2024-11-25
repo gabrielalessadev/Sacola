@@ -22,5 +22,5 @@ CREATE TABLE IF NOT EXISTS cliente (
     endereco VARCHAR(255),
     email VARCHAR(255),
     telefone VARCHAR(20),
-    cpf VARCHAR(11) UNIQUE NOT NULL
+    cpf VARCHAR(11) NOT NULL
 );
