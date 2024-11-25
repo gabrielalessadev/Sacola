@@ -3,9 +3,10 @@ import '../style/Produto.css';
 import Axios from "axios";
 
 function Produto() {
-    const [values, setValues] = useState({ codigo: '', nome: '' });
+    const [values, setValues] = useState({ codigo: '', nome: '', id: null });
     const [image, setImage] = useState(null);
     const [produtos, setProdutos] = useState([]);
+    const [botaoText, setBotaoText] = useState("Cadastrar Produto");
     const fileNameDisplay = document.getElementById('file-name');
     const productImageInput = document.getElementById('product-image');
 
@@ -31,32 +32,48 @@ function Produto() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            Axios.get('http://localhost:3001/api/produto', {
-                params: { codigo: values.codigo }
-            }).then(response => {
-                if (response.data.itens.length > 0) {
-                    alert('O Produto já existe no nosso banco de dados.');
-                    return;
-                } else {
-                    Axios.post("http://localhost:3001/api/produto", {
-                        nome:values.nome,
-                        codigo:values.codigo,
-                        preco: 20,
-                        quantidade_disponivel: 10
-                    }).then(response => {
-                        window.location.reload();
-          
-                    }).catch(error => {
-                      console.error('Erro ao verificar produto', error);
-                    });
-                }
-            }).catch(error => {
-                console.error('Erro ao verificar produto', error);
-              });
-        } catch (error) {
-            console.error('Erro no cadastro de produto:', error);
+        if(!!!values.id){
+            try {
+                await Axios.get('http://localhost:3001/api/produto', {
+                    params: { codigo: values.codigo }
+                }).then(response => {
+                    if (response.data.itens.length > 0) {
+                        alert('O Produto já existe no nosso banco de dados.');
+                        return;
+                    } else {
+                        Axios.post("http://localhost:3001/api/produto", {
+                            nome:values.nome,
+                            codigo:values.codigo,
+                            preco: 20,
+                            quantidade_disponivel: 10
+                        }).then(response => {
+                            window.location.reload();
+            
+                        }).catch(error => {
+                        console.error('Erro ao verificar produto', error);
+                        });
+                    }
+                }).catch(error => {
+                    console.error('Erro ao verificar produto', error);
+                });
+            } catch (error) {
+                console.error('Erro no cadastro de produto:', error);
+            }
+        } else {
+            Axios.patch(`http://localhost:3001/api/produto/${values.id}`, {
+                nome:values.nome,
+                codigo:values.codigo,
+                preco: 20,
+                quantidade_disponivel: 10
+            }).then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.error('Houve um erro ao atualizar o produto', error);
+                alert('Erro ao atualizar produto.');
+                return;
+            });
         }
+        window.location.reload();
 
     }
 
@@ -75,8 +92,18 @@ function Produto() {
         return "http://localhost:3001/images/" + url;
     }
 
+    const handleEdit = (id) => {
+        const client = produtos.find(obj => obj.id === id)
+        
+        setValues({ codigo: client.codigo, nome: client.nome, id: client.id })
+        document.getElementById('product-name').value = client.nome
+        document.getElementById('product-code').value = client.codigo
+        setBotaoText("Editar Produto")
+        console.log(values)
+    }
+
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/produto')
+        Axios.get('http://localhost:3001/api/produto', {timeout: 5000})
             .then(response => {
                 setProdutos(response.data.itens);
             })
@@ -112,7 +139,8 @@ function Produto() {
                         name="codigo"
                         onChange={changeValues}
                         required />
-                    <button type="submit">Cadastrar Produto</button>
+                    <button type="submit" style={{marginBottom: '20px'}}>{botaoText}</button>
+                    {values.id && <button onClick={() => window.location.reload()} class="delete-btn">Cancelar</button>}
                 </form>
             </div>
 
@@ -120,7 +148,7 @@ function Produto() {
                 <h3>Produtos Cadastrados</h3>
                 <ul id="product-list" class="product-list">
                     {produtos.map(item => (
-                        <li class="product-item">
+                        <li key={item.id} class="product-item">
                             <div class="product-info">
                                 <strong>Nome: </strong>
                                 {item.nome}
@@ -128,6 +156,7 @@ function Produto() {
                                 <strong>Codigo: </strong>
                                 {item.codigo}
                             </div>
+                            <button onClick={() => handleEdit(item.id)} class="edit-btn">Editar</button>
                             <button onClick={() => handleDelete(item.id)} class="delete-btn">Excluir</button>
                         </li>
                     ))}

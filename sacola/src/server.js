@@ -11,7 +11,13 @@ const connection = mysql.createConnection({
   database: 'sacola' // substitua pelo nome do seu banco
 });
 
-app.use(cors()); // habilita cors
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'PATCH', 'OPTIONS', 'DELETE'],
+  // allowedHeaders: ['*'],
+  preflightContinue: true
+}
+app.use(cors(corsOptions)); // habilita cors
 app.use(express.json()); //habilita json como padrão
 
 // CRUD produto

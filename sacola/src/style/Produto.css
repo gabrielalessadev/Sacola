@@ -55,7 +55,7 @@ body {
 
 .form-container {
     max-width: 400px; 
-    min-height: 400px;
+    min-height: 450px;
     background-color: #fff;
     padding: 2rem;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -198,6 +198,11 @@ button[type="submit"]:hover {
 
 .delete-btn {
     background-color: #dc3545;
+    margin-right: 20px;
+}
+
+.edit-btn {
+    margin-right: 10px;
     margin-left: auto;
 }
 
