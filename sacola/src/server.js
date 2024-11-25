@@ -32,7 +32,12 @@ values ('${produto.nome}', '${produto.codigo}', ${produto.preco}, ${produto.quan
 });
 
 app.get('/api/produto', (req, res) => {
-  const query = "SELECT * FROM produto"
+  const codigo = req.query.codigo;
+  let query = "SELECT * FROM produto"
+
+  if (codigo) {
+    query += ` WHERE codigo = '${codigo}'`;
+  }
 
   connection.query(query, (err, results) => {
     if (err) {
@@ -122,7 +127,12 @@ values ('${cliente.nome}', '${cliente.endereco}', '${cliente.email}', '${cliente
 });
 
 app.get('/api/cliente', (req, res) => {
-  const query = "SELECT * FROM cliente"
+  const email = req.query.email;
+  let query = "SELECT * FROM cliente"
+
+  if (email) {
+    query += ` WHERE email = '${email}'`;
+  }
 
   connection.query(query, (err, results) => {
     if (err) {
